@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<overlay id="autostopOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript">
+		<![CDATA[
+
+			var TUBESTOP = {
+				DOMContentLoaded : function (event) {
+					var page = event.target;
+		
+					if ((page.location.protocol == "http:")||(page.location.protocol == "https:")){
+						const isYoutube = /(\w*\.)?youtube\.com$/i;
+			
+						if (!isYoutube.test(page.location.host)) {
+							this.checkForYouTubeEmbeds(page);
+							return;
+						}
+					}
+					else {
+						return;
+					}
+					
+					var playerDiv = page.getElementById("playerDiv");
+					
+					if (playerDiv) {
+						if (page.getElementsByName("embed_code")[0].value.indexOf("<") != -1){
+							playerDiv.innerHTML = page.getElementsByName("embed_code")[0].value;
+						}
+						else {
+							// Embedding disabled
+							var code = playerDiv.innerHTML;
+							code = code.replace(/"/g, "'");
+							code = code.replace(/'/g, "\\'");
+							playerDiv.innerHTML = "<a href=" + '"' + "javascript:void(0);" + '"' + " onclick=" + '"' + "this.parentNode.innerHTML = '" + code + "';" + '"' + " style='display: block; width: 440px; padding-top: 170px; padding-bottom: 180px; text-align: center; border: 1px solid black;'>Click to play<br />Courtesy of TubeStop</a>";
+						}
+					}
+				},
+				
+				checkForYouTubeEmbeds : function (page) {
+					var params = page.getElementsByTagName("param");
+					
+					for (var i = 0; i < params.length; i++){
+						var param = params[i];
+						var value = param.getAttribute("value");
+						
+						if (value && value.match(/youtube\.com.*autoplay=1/i)){
+							param.setAttribute("value",value.replace(/&autoplay=1/i,""));
+							param.parentNode.innerHTML = param.parentNode.innerHTML;
+						}
+					}
+					
+					var embeds = page.getElementsByTagName("embed");
+					
+					for (var i = 0; i < embeds.length; i++){
+						var embed = embeds[i];
+						var src = embed.getAttribute("src");
+						
+						if (src.match(/youtube\.com.*autoplay=1/i)){
+							embed.setAttribute("src",src.replace(/&autoplay=1/i,""));
+							embed.parentNode.innerHTML = embed.parentNode.innerHTML;
+						}
+					}
+					
+					return;
+				}
+			};
+
+			var appcontent = document.getElementById("appcontent");
+			
+			if (appcontent) {
+				appcontent.addEventListener("DOMContentLoaded", function (event) { TUBESTOP.DOMContentLoaded(event); }, false);
+			}
+
+		]]>
+	</script>
+</overlay>

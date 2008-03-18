@@ -1,0 +1,3 @@
+content     tubestop     jar:chrome/tubestop.jar!/content/
+
+overlay     chrome://browser/content/browser.xul                chrome://tubestop/content/overlay.xul
