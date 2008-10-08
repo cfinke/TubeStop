@@ -1,18 +1,21 @@
-rm -rf `find ./ -name ".DS_Store"`
-rm -rf `find ./ -name "Thumbs.db"`
-rm tubestop.xpi
-rm -rf .tmp_xpi_dir/
+rm -rf .xpi_work_dir/
 
 chmod -R 0777 tubestop/
+rm -f tubestop.xpi
+mkdir .xpi_work_dir
+cp -r tubestop/* .xpi_work_dir/
+cd .xpi_work_dir/
 
-mkdir .tmp_xpi_dir/
-cp -r tubestop/* .tmp_xpi_dir/
+rm -rf `find . -name ".svn"`
+rm -rf `find . -name ".DS_Store"`
+rm -rf `find . -name "Thumbs.db"`
 
-cd .tmp_xpi_dir/chrome/
+cd chrome/
 zip -rq ../tubestop.jar *
 rm -rf *
 mv ../tubestop.jar ./
 cd ../
 zip -rq ../tubestop.xpi *
-cd ../
-rm -rf .tmp_xpi_dir/
+cd ..
+rm -rf .xpi_work_dir/
+cp tubestop.xpi ~/Desktop/
