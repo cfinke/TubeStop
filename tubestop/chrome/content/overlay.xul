@@ -4,6 +4,14 @@
 		<![CDATA[
 
 			var TUBESTOP = {
+				init : function () {
+					var appcontent = document.getElementById("appcontent");
+
+					if (appcontent) {
+						appcontent.addEventListener("DOMContentLoaded", function (event) { TUBESTOP.DOMContentLoaded(event); }, false);
+					}
+				},
+				
 				DOMContentLoaded : function (event) {
 					var page = event.target;
 		
@@ -19,7 +27,7 @@
 						return;
 					}
 					
-					var playerDiv = page.getElementById("playerDiv");
+					var playerDiv = page.getElementById("watch-player-div");
 					
 					if (playerDiv) {
 						if (page.getElementsByName("embed_code")[0].value.indexOf("<") != -1){
@@ -30,7 +38,7 @@
 							var code = playerDiv.innerHTML;
 							code = code.replace(/"/g, "'");
 							code = code.replace(/'/g, "\\'");
-							playerDiv.innerHTML = "<a href=" + '"' + "javascript:void(0);" + '"' + " onclick=" + '"' + "this.parentNode.innerHTML = '" + code + "';" + '"' + " style='display: block; width: 440px; padding-top: 170px; padding-bottom: 180px; text-align: center; border: 1px solid black;'>Click to play<br />Courtesy of TubeStop</a>";
+							playerDiv.innerHTML = "<a href=" + '"' + "javascript:void(0);" + '"' + " onclick=" + '"' + "this.parentNode.innerHTML = '" + code + "';" + '"' + " style='display: block; width: 478px; padding-top: 170px; padding-bottom: 180px; text-align: center; border: 1px solid #CCC;'>Click to play<br />Courtesy of TubeStop</a>";
 						}
 					}
 				},
@@ -63,12 +71,8 @@
 					return;
 				}
 			};
-
-			var appcontent = document.getElementById("appcontent");
 			
-			if (appcontent) {
-				appcontent.addEventListener("DOMContentLoaded", function (event) { TUBESTOP.DOMContentLoaded(event); }, false);
-			}
+			addEventListener("load", function () { TUBESTOP.init(); }, false);
 
 		]]>
 	</script>
