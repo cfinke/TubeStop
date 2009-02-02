@@ -30,8 +30,11 @@
 					var playerDiv = page.getElementById("watch-player-div");
 					
 					if (playerDiv) {
-						if (page.getElementsByName("embed_code")[0].value.indexOf("<") != -1){
-							playerDiv.innerHTML = page.getElementsByName("embed_code")[0].value;
+						if (page.getElementById("embed_code").value.indexOf("<") != -1){
+							var embed_code = page.getElementById("embed_code").value;
+							embed_code = embed_code.replace(/height="[0-9]+"/g, 'height="385"');
+							embed_code = embed_code.replace(/width="[0-9]+"/g, 'width="640"');
+							playerDiv.innerHTML = embed_code;
 						}
 						else {
 							// Embedding disabled
