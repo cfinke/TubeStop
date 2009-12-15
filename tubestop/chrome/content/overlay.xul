@@ -5,10 +5,30 @@
 
 			var TUBESTOP = {
 				init : function () {
-					var appcontent = document.getElementById("appcontent");
+					var firefoxBrowser = document.getElementById("appcontent");
 
-					if (appcontent) {
-						appcontent.addEventListener("DOMContentLoaded", function (event) { TUBESTOP.DOMContentLoaded(event); }, false);
+					if (firefoxBrowser) {
+						firefoxBrowser.addEventListener("DOMContentLoaded", TUBESTOP.DOMContentLoaded, false);
+					}
+					
+					var fennecBrowser = document.getElementById("browsers");
+					
+					if (fennecBrowser) {
+						fennecBrowser.addEventListener("load", TUBESTOP.DOMContentLoaded, true);
+					}
+				},
+				
+				uninit : function () {
+					var firefoxBrowser = document.getElementById("appcontent");
+
+					if (firefoxBrowser) {
+						firefoxBrowser.removeEventListener("DOMContentLoaded", TUBESTOP.DOMContentLoaded, false);
+					}
+				
+					var fennecBrowser = document.getElementById("browsers");
+				
+					if (fennecBrowser) {
+						fennecBrowser.removeEventListener("load", TUBESTOP.DOMContentLoaded, true);
 					}
 				},
 				
@@ -19,7 +39,7 @@
 						const isYoutube = /(\w*\.)?youtube\.com$/i;
 			
 						if (!isYoutube.test(page.location.host)) {
-							this.checkForYouTubeEmbeds(page);
+							TUBESTOP.checkForYouTubeEmbeds(page);
 							return;
 						}
 					}
@@ -76,6 +96,7 @@
 			};
 			
 			addEventListener("load", function () { TUBESTOP.init(); }, false);
+			addEventListener("unload", function () { TUBESTOP.uninit(); }, false);
 
 		]]>
 	</script>
