@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>tubestop@efinke.com</em:id>
 		<em:name>TubeStop</em:name>
-		<em:version>1.2.8pre</em:version>
+		<em:version>1.4</em:version>
 		<em:description>Stops the auto-play of YouTube videos.</em:description>
 		<em:creator>Christopher Finke</em:creator>
 		<em:homepageURL>http://www.chrisfinke.com/addons/tubestop/</em:homepageURL>

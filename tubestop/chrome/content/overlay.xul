@@ -1,102 +1,10 @@
 <?xml version="1.0"?>
-<overlay id="autostopOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://tubestop/content/overlay.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
-
-			var TUBESTOP = {
-				init : function () {
-					var firefoxBrowser = document.getElementById("appcontent");
-
-					if (firefoxBrowser) {
-						firefoxBrowser.addEventListener("DOMContentLoaded", TUBESTOP.DOMContentLoaded, false);
-					}
-					
-					var fennecBrowser = document.getElementById("browsers");
-					
-					if (fennecBrowser) {
-						fennecBrowser.addEventListener("load", TUBESTOP.DOMContentLoaded, true);
-					}
-				},
-				
-				uninit : function () {
-					var firefoxBrowser = document.getElementById("appcontent");
-
-					if (firefoxBrowser) {
-						firefoxBrowser.removeEventListener("DOMContentLoaded", TUBESTOP.DOMContentLoaded, false);
-					}
-				
-					var fennecBrowser = document.getElementById("browsers");
-				
-					if (fennecBrowser) {
-						fennecBrowser.removeEventListener("load", TUBESTOP.DOMContentLoaded, true);
-					}
-				},
-				
-				DOMContentLoaded : function (event) {
-					var page = event.target;
-		
-					if ((page.location.protocol == "http:")||(page.location.protocol == "https:")){
-						const isYoutube = /(\w*\.)?youtube\.com$/i;
 			
-						if (!isYoutube.test(page.location.host)) {
-							TUBESTOP.checkForYouTubeEmbeds(page);
-							return;
-						}
-					}
-					else {
-						return;
-					}
-					
-					var playerDiv = page.getElementById("watch-player-div");
-					
-					if (playerDiv) {
-						if (page.getElementById("embed_code").value.indexOf("<") != -1){
-							var embed_code = page.getElementById("embed_code").value;
-							embed_code = embed_code.replace(/height="[0-9]+"/g, 'height="385"');
-							embed_code = embed_code.replace(/width="[0-9]+"/g, 'width="640"');
-							playerDiv.innerHTML = embed_code;
-						}
-						else {
-							// Embedding disabled
-							var code = playerDiv.innerHTML;
-							code = code.replace(/"/g, "'");
-							code = code.replace(/'/g, "\\'");
-							playerDiv.innerHTML = "<a href=" + '"' + "javascript:void(0);" + '"' + " onclick=" + '"' + "this.parentNode.innerHTML = '" + code + "';" + '"' + " style='display: block; width: 478px; padding-top: 170px; padding-bottom: 180px; text-align: center; border: 1px solid #CCC;'>Click to play<br />Courtesy of TubeStop</a>";
-						}
-					}
-				},
-				
-				checkForYouTubeEmbeds : function (page) {
-					var params = page.getElementsByTagName("param");
-					
-					for (var i = 0; i < params.length; i++){
-						var param = params[i];
-						var value = param.getAttribute("value");
-						
-						if (value && value.match(/youtube\.com.*autoplay=1/i)){
-							param.setAttribute("value",value.replace(/&autoplay=1/i,""));
-							param.parentNode.innerHTML = param.parentNode.innerHTML;
-						}
-					}
-					
-					var embeds = page.getElementsByTagName("embed");
-					
-					for (var i = 0; i < embeds.length; i++){
-						var embed = embeds[i];
-						var src = embed.getAttribute("src");
-						
-						if (src.match(/youtube\.com.*autoplay=1/i)){
-							embed.setAttribute("src",src.replace(/&autoplay=1/i,""));
-							embed.parentNode.innerHTML = embed.parentNode.innerHTML;
-						}
-					}
-					
-					return;
-				}
-			};
-			
-			addEventListener("load", function () { TUBESTOP.init(); }, false);
-			addEventListener("unload", function () { TUBESTOP.uninit(); }, false);
+			addEventListener("load", TUBESTOP.load, false);
 
 		]]>
 	</script>
