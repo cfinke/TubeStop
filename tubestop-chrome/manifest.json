@@ -1,0 +1,15 @@
+{
+	"name": "__MSG_extName__",
+	"version": "2.0",
+	"description": "__MSG_extDescription__",
+	"content_scripts": [
+		{
+			"matches": ["http://*/*","https://*/*"],
+			"js": ["tubestop.js"]
+		}
+	],
+	"default_locale" : "en_US",
+	"icons": {
+		"32": "tubestop.png"
+	}
+}

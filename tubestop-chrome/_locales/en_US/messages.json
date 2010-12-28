@@ -1,0 +1,14 @@
+{
+	"extName" : {
+		"message" : "TubeStop",
+		"description" : "The name of this extension."
+	},
+	"extDescription" : {
+		"message" : "Stops YouTube videos from playing automatically.",
+		"description" : "A description of this extension."
+	},
+	"clickToPlay" : {
+		"message" : "Click to play, courtesy of TubeStop",
+		"description" : "The message that is shown in place of a video when the video is auto-stopped."
+	}
+}
