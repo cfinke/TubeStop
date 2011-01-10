@@ -1,0 +1,11 @@
+{
+	"extName": {
+		"message": "TubeStop"
+	},
+	"extDescription": {
+		"message": "Empêche les vidéos de YouTube de se lancer automatiquement"
+	},
+	"clickToPlay": {
+		"message": "Cliquez pour jouer la vidéo, merci TubeStop"
+	}
+}

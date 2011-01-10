@@ -1,0 +1,11 @@
+{
+	"extName": {
+		"message": "TubeStop"
+	},
+	"extDescription": {
+		"message": "Verhindert, dass YouTube Videos automatisch abspielt."
+	},
+	"clickToPlay": {
+		"message": "Klicken, um abzuspielen, bereitgestellt von TubeStop"
+	}
+}

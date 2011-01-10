@@ -1,0 +1,11 @@
+{
+	"extName": {
+		"message": "TubeStop"
+	},
+	"extDescription": {
+		"message": "Voorkomt het automatisch afspelen van YouTube videos."
+	},
+	"clickToPlay": {
+		"message": "Klik om te spelen, verzorgd door TubeStop"
+	}
+}
