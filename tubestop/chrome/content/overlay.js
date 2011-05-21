@@ -51,18 +51,10 @@ var TUBESTOP = {
 		var playerDiv = page.getElementById("watch-player");
 		
 		if (playerDiv) {
-			if (page.body.innerHTML.indexOf("'EMBEDDING_DISABLED':") != -1) {
-				var script = playerDiv.getElementsByTagName("script")[0];
-				var code = script.innerHTML.match(/swfHTML[^\n]+"\s+:\s+"(<embed.*?)<noembed/i)[1];
+			if (page.getElementById("watch-actions-embedding-disabled")) {
+				var code = playerDiv.innerHTML;
 				
 				playerDiv.innerHTML = "";
-				
-				TUBESTOP.log(code);
-				code = code.replace(/([^\\])"\s*\+\s*"/g, "$1");
-				TUBESTOP.log(code);
-				code = code.replace(/\\/g, "");
-				
-				TUBESTOP.log(code);
 				
 				var a = page.createElement("a");
 				a.setAttribute("href", "javascript:void(0);");
